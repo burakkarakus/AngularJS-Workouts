@@ -6,12 +6,38 @@
     <script type="text/javascript" src="app.js"></script>
   </head>
   <body class="container" ng-controller="StoreController as store">
-    <div ng-repeat="product in store.products" class="product row">
+  <section ng-controller="PanelController as panel">
+    	<ul class="nav nav-pills">
+    		<li ng-class="{active: panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
+    		<li ng-class="{active: panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specs</a></li>
+    		<li ng-class="{active: panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>    		
+    	</ul>
+  </section>
+    <div ng-repeat="product in store.products" >
+    <div class="product row">
       <h3>
-        {{product.name}}
-        <em class="pull-right">${{product.price}}</em>
+        {{product.name}}<br/>
+        <img ng-src="{{ product.images[0].full }}"/>
+        <em class="pull-right">{{product.price | currency}}</em>
       </h3>
       <button ng-show="product.canPurchase">Add This!</button>
+      </div>
+      <div class="panel" ng-show="tab === 1">
+    		<h4>Description</h4>
+    		<p>{{product.description}}</p>
+    	</div>
+		<div class="panel" ng-show="tab === 2">
+    		<h4>Specifications</h4>
+    		<p>{{product.specs}}</p>
+    	</div>
+    	<div class="panel" ng-show="tab === 3 && product.reviews.length > 0">
+    		<h4>Reviews</h4>
+    		<li ng-repeat="review in product.reviews">{{review.body}}</li>
+    	</div>
     </div>
+    <br/>
+    
   </body>
 </html>
+<!-- ng-show kontrollerini html in içinde yapmak pek iyi değil çok kondisyon olabilir, onun için bu kontrolleri ayrı bir
+controllera taşımak en iyisi -->
