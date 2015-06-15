@@ -1,0 +1,4 @@
+tekrar tekrar kullanılması gereken kodları ayrıca bir html'e [product-info.html] kopyalayıp, bu html'i ihtiyaç olan yerlerde ng-include ile [<h3 ng-include="'product-info.html'"></h3>]
+include edebiliriz fekat tavsiye edilen, bunları directivelere koymak, yani şöyle çağıracak yapıyı kurmak: <product-info></product-info> app.directive('productInfo')
+
+htmlde kullandığımız x-z yapısı app.directive'de xZ ye otomatik dönüşüyor, directive yazarken buna dikkat etmek gerek. 
